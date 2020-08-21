@@ -21,6 +21,7 @@ Feel free to submit a Pull Request to improve this project, contributions are mu
 - Modern JS (ES6++)
 - Development/Production Builds
 - Lazy Loading with React
+- Tailwind CSS
 
 ## Questions?
 
