@@ -53,6 +53,7 @@ module.exports = {
               sourceMap: isDev,
               plugins: function() {
                 return [
+                  require('tailwindcss'),
                   require("precss")(),
                   require("autoprefixer")({
                     browsers: ["last 3 versions", "> 1%", "IE 10"]

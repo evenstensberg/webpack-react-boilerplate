@@ -1,6 +1,7 @@
 import React, { Component, Suspense, lazy } from "react";
 import ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
+import "./index.scss"
 
 const HelloWorldComponent = lazy(() => import("./HelloWorldComponent"));
 
