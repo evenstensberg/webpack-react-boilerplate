@@ -48,20 +48,6 @@ module.exports = {
           },
           {
             loader: "postcss-loader",
-            options: {
-              ident: "postcss",
-              sourceMap: isDev,
-              plugins: function() {
-                return [
-                  require('tailwindcss'),
-                  require("precss")(),
-                  require("autoprefixer")({
-                    browsers: ["last 3 versions", "> 1%", "IE 10"]
-                  }),
-                  require("postcss-preset-env")()
-                ];
-              }
-            }
           },
           {
             loader: "sass-loader",
