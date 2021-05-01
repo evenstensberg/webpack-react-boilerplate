@@ -6,7 +6,6 @@ const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const isDev = false;
-const isHmr = process.env.NODE_ENV === "hot";
 
 module.exports = {
   devtool: false,
@@ -17,8 +16,8 @@ module.exports = {
   mode: "production",
   output: {
     path: join(__dirname, "..", "public"),
-    filename: "js/[name].bundle.[hash].js",
-    chunkFilename: "chunks/[name].chunk.[hash].js",
+    filename: "js/[name].bundle.[fullhash].js",
+    chunkFilename: "chunks/[name].chunk.[fullhash].js",
     publicPath: "/"
   },
   module: {
@@ -29,7 +28,7 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
-              name: "[path][name]-[hash:8].[ext]"
+              name: "[path][name]-[fullhash:8].[ext]"
             }
           }
         ]
@@ -40,8 +39,6 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: isHmr,
-              reloadAll: isHmr
             }
           },
           {
@@ -148,9 +145,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("production")
-      }
+      'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new HtmlWebpackPlugin({
       filename: "index.html",
@@ -159,8 +154,12 @@ module.exports = {
       minify: true
     }),
     new MiniCssExtractPlugin({
-      filename: "css/[name].bundle.[hash].css",
-      chunkFilename: "chunks/[id].chunk.[hash].css"
+      filename: "css/[name].bundle.[fullhash].css",
+      chunkFilename: "chunks/[id].chunk.[fullhash].css"
     })
-  ]
+  ],
+  stats: {
+    children: true,
+    errorDetails: true
+  }
 };

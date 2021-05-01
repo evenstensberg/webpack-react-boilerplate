@@ -4,18 +4,17 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const isDev = true;
-const isHmr = process.env.NODE_ENV === "hot";
 
 module.exports = {
   devtool: "inline-source-map",
   entry: {
     main: "./src/index.js"
   },
-  mode: "production",
+  mode: "development",
   output: {
     path: join(__dirname, "..", "public"),
-    filename: "js/[name].bundle.[hash].js",
-    chunkFilename: "chunks/[name].chunk.[hash].js"
+    filename: "js/[name].bundle.[fullhash].js",
+    chunkFilename: "chunks/[name].chunk.[fullhash].js"
   },
   module: {
     rules: [
@@ -25,7 +24,7 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
-              name: "[path][name]-[hash:8].[ext]"
+              name: "[path][name]-[fullhash:8].[ext]"
             }
           }
         ]
@@ -36,8 +35,6 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: isHmr,
-              reloadAll: isHmr
             }
           },
           {
@@ -99,9 +96,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("development")
-      }
+      'process.env.NODE_ENV': JSON.stringify('development')
     }),
     new HtmlWebpackPlugin({
       filename: "index.html",
@@ -109,8 +104,12 @@ module.exports = {
       inject: true
     }),
     new MiniCssExtractPlugin({
-      filename: "css/[name].bundle.[hash].css",
-      chunkFilename: "chunks/[id].chunk.[hash].css"
+      filename: "css/[name].bundle.[fullhash].css",
+      chunkFilename: "chunks/[id].chunk.[fullhash].css"
     })
-  ]
+  ],
+  stats: {
+    children: true,
+    errorDetails: true
+  }
 };

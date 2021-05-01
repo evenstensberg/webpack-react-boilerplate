@@ -7,7 +7,7 @@ This is a simple boilerplate for getting started with react, using webpack. The 
 ```sh
 $ git clone https://github.com/evenstensberg/webpack-react-boilerplate.git
 $ cd webpack-react-boilerplate
-$ npm install
+$ npm install && npm run start
 ```
 
 ## Contributing
@@ -21,7 +21,6 @@ Feel free to submit a Pull Request to improve this project, contributions are mu
 - Modern JS (ES6++)
 - Development/Production Builds
 - Lazy Loading with React
-- Tailwind CSS
 
 ## Questions?
 
