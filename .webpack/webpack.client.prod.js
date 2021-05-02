@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const isDev = false;
 
@@ -133,14 +133,7 @@ module.exports = {
           unsafe_Function: true
         }
       }),
-      new OptimizeCssAssetsPlugin({
-        assetNameRegExp: /\.optimize\.css$/g,
-        cssProcessor: require("cssnano"),
-        cssProcessorPluginOptions: {
-          preset: ["default", { discardComments: { removeAll: true } }]
-        },
-        canPrint: true
-      })
+      new CssMinimizerPlugin(),
     ]
   },
   plugins: [
