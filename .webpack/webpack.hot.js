@@ -4,11 +4,18 @@ const devConfig = require("./webpack.client.dev");
 module.exports = merge(devConfig, {
   devServer: {
     hot: true,
-    contentBase: "/public/",
     port: 8090,
-    inline: true,
     headers: { "Access-Control-Allow-Origin": "*" },
-    open: true
+    open: true,
+    proxy: {
+      "^/assets": {
+        target: undefined,
+        changeOrigin: true,
+        pathRewrite: {
+          "^/assets": "/assets",
+        },
+      },
+    }
   },
   output: {
     publicPath: "/"

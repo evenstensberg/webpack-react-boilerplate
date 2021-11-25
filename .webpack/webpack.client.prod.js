@@ -129,8 +129,7 @@ module.exports = {
           ie8: false,
           keep_classnames: false,
           keep_fnames: false,
-          safari10: false,
-          unsafe_Function: true
+          safari10: false
         }
       }),
       new CssMinimizerPlugin(),
