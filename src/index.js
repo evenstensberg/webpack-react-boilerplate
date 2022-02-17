@@ -1,9 +1,10 @@
 import React, { Component, Suspense, lazy } from "react";
 import ReactDOM from "react-dom";
-import { AppContainer } from "react-hot-loader";
-import "./index.scss"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./index.scss";
 
 const HelloWorldComponent = lazy(() => import("./HelloWorldComponent"));
+const AnotherRouteComponent = lazy(() => import("./AnotherRouteComponent"));
 
 class App extends Component {
   constructor() {
@@ -20,11 +21,21 @@ class App extends Component {
   }
 }
 
-const render = Component => {
+const render = (Component) => {
   ReactDOM.render(
-    <AppContainer>
-      <Component />
-    </AppContainer>,
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<Component />} />
+        <Route
+          path="other"
+          element={
+            <Suspense fallback={<div>Loading Route...</div>}>
+              <AnotherRouteComponent />
+            </Suspense>
+          }
+        />
+      </Routes>
+    </BrowserRouter>,
     document.getElementById("root")
   );
 };
