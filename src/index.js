@@ -1,5 +1,6 @@
 import React, { Component, Suspense, lazy } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.scss";
 
@@ -23,8 +24,9 @@ class App extends Component {
 
 const render = (Component) => {
   const container = document.getElementById("root");
-  
-  ReactDOM.render(
+  const root = createRoot(container); 
+
+  root.render(
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Component />} />
@@ -37,8 +39,7 @@ const render = (Component) => {
           }
         />
       </Routes>
-    </BrowserRouter>,
-    container
+    </BrowserRouter>
   );
 };
 
